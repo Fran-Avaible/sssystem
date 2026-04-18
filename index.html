@@ -1,204 +1,580 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generator Hasil Try Out UTBK</title>
-<style>
-    body { 
-        font-family: Arial, sans-serif; 
-        display: flex; 
-        gap: 20px; 
-        padding: 20px; 
-        background: #f0f2f5; 
-        margin: 0;
-    }
-    .form-container { 
-        background: #fff; 
-        padding: 25px; 
-        border-radius: 8px; 
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-        width: 35%; 
-        height: fit-content;
-    }
-    .preview-container { 
-        background: #fff; 
-        padding: 40px; 
-        border-radius: 8px; 
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-        width: 65%; 
-    }
-    h2, h3 { color: #333; }
-    h3 { margin-top: 25px; margin-bottom: 10px; font-size: 16px; border-bottom: 2px solid #eee; padding-bottom: 5px; }
-    .form-group { margin-bottom: 12px; }
-    label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #555; }
-    input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-    input:focus { border-color: #007BFF; outline: none; }
-    button { 
-        width: 100%; 
-        padding: 12px; 
-        background: #007BFF; 
-        color: white; 
-        border: none; 
-        cursor: pointer; 
-        border-radius: 4px; 
-        font-size: 16px; 
-        font-weight: bold;
-        margin-top: 20px; 
-        transition: background 0.3s;
-    }
-    button:hover { background: #0056b3; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Hasil Try Out UTBK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Dokumen Preview Styles */
-    .dokumen { 
-        font-family: 'Times New Roman', Times, serif; 
-        color: #000; 
-        line-height: 1.5;
-    }
-    .header { text-align: center; margin-bottom: 30px; }
-    .header h1 { font-size: 20px; margin: 0 0 10px 0; font-weight: bold; }
-    .header h2 { font-size: 16px; margin: 0; font-weight: bold; }
-    
-    .info-table { width: 100%; margin-bottom: 20px; font-size: 15px; }
-    .info-table td { padding: 4px 0; vertical-align: top; }
-    .info-table td:first-child { width: 180px; }
-    .info-table td:nth-child(2) { width: 20px; }
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            gap: 28px;
+            padding: 28px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            position: relative;
+        }
 
-    .section-title { font-weight: bold; text-decoration: underline; margin-top: 20px; font-size: 15px; }
-    .score-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 15px; }
-    .score-table td { padding: 4px 0; }
-    .score-table td:first-child { padding-left: 20px; width: 400px; }
-    .score-table td:nth-child(2) { width: 20px; text-align: center; }
-    .score-table td:last-child { text-align: right; }
+        /* Animated background orbs */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
 
-    .summary-table { 
-        width: 100%; 
-        font-weight: bold; 
-        font-size: 15px; 
-        margin-top: 20px;
-    }
-    .summary-table td { padding: 4px 0; }
-    .summary-table td:first-child { width: 420px; text-align: right; }
-    .summary-table td:nth-child(2) { width: 20px; text-align: center; }
-    .summary-table td:last-child { text-align: right; }
+        body::before {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #7c3aed, #a855f7);
+            top: -100px;
+            left: -100px;
+        }
 
-    /* Pengaturan Cetak (Print) */
-    @media print {
-        body { background: #fff; padding: 0; display: block; }
-        .form-container { display: none; }
-        .preview-container { width: 100%; box-shadow: none; padding: 0; margin: 0; }
-        @page { margin: 2cm; }
-    }
-</style>
+        body::after {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #06b6d4, #3b82f6);
+            bottom: -80px;
+            right: -80px;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+        }
+
+        /* ===== FORM PANEL ===== */
+        .form-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 28px;
+            border-radius: 20px;
+            width: 38%;
+            height: fit-content;
+            position: relative;
+            z-index: 1;
+            color: #e2e8f0;
+        }
+
+        .form-container h2 {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .form-container h3 {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a78bfa;
+            margin-top: 24px;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(167, 139, 250, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-container h3::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-container label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #94a3b8;
+            letter-spacing: 0.2px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-container input:focus {
+            outline: none;
+            border-color: #a78bfa;
+            background: rgba(167, 139, 250, 0.08);
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+        }
+
+        .form-container input::placeholder {
+            color: #64748b;
+        }
+
+        .form-container input[type="number"] {
+            font-variant-numeric: tabular-nums;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #7c3aed, #3b82f6);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            margin-top: 24px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+        }
+
+        button:hover::before {
+            opacity: 1;
+        }
+
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* ===== PREVIEW PANEL ===== */
+        .preview-container {
+            background: #ffffff;
+            padding: 50px;
+            border-radius: 20px;
+            width: 62%;
+            position: relative;
+            z-index: 1;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Document Preview Styles */
+        .dokumen {
+            font-family: 'Times New Roman', Times, serif;
+            color: #000;
+            line-height: 1.5;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-top: 3px solid #1e3a5f;
+            border-bottom: 3px solid #1e3a5f;
+            padding: 18px 0;
+            background: linear-gradient(180deg, rgba(30, 58, 95, 0.04), transparent);
+        }
+
+        .header h1 {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #1e3a5f;
+            letter-spacing: 1px;
+        }
+
+        .header h2 {
+            font-size: 16px;
+            margin: 5px 0;
+            font-weight: bold;
+            color: #1e3a5f;
+        }
+
+        .info-table {
+            margin: 30px auto;
+            font-size: 15px;
+            width: fit-content;
+            border-collapse: collapse;
+        }
+
+        .info-table td {
+            padding: 4px 10px;
+            vertical-align: top;
+        }
+
+        .info-table td:first-child {
+            width: 120px;
+        }
+
+        .info-table td:nth-child(2) {
+            width: 10px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 20px;
+            font-size: 15px;
+            color: #1e3a5f;
+        }
+
+        .score-table {
+            width: 90%;
+            margin: 10px auto;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        .score-table td {
+            padding: 4px 0;
+        }
+
+        .score-table td:first-child {
+            padding-left: 20px;
+            width: 350px;
+        }
+
+        .score-table td:nth-child(2) {
+            width: 20px;
+            text-align: center;
+        }
+
+        .score-table td:last-child {
+            text-align: left;
+            padding-left: 40px;
+        }
+
+        .summary-table {
+            width: 90%;
+            margin: 0 auto;
+            font-weight: bold;
+            font-size: 15px;
+            border-top: 3px solid #1e3a5f;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .summary-table td {
+            padding: 6px 0;
+        }
+
+        .summary-table td:first-child {
+            width: 370px;
+            text-align: right;
+        }
+
+        .summary-table td:nth-child(2) {
+            width: 20px;
+            text-align: center;
+        }
+
+        .summary-table td:last-child {
+            text-align: left;
+            padding-left: 40px;
+        }
+
+        /* ===== FOOTER BRANDING ===== */
+        .footer-brand {
+            text-align: center;
+            margin-top: 28px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: #475569;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                display: block;
+            }
+
+            body::before,
+            body::after {
+                display: none;
+            }
+
+            .form-container {
+                display: none;
+            }
+
+            .preview-container {
+                width: 100%;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .header {
+                border-top: 2px solid #000;
+                border-bottom: 2px solid #000;
+                background: none;
+            }
+
+            .header h1,
+            .header h2 {
+                color: #000;
+            }
+
+            .section-title {
+                color: #000;
+            }
+
+            .summary-table {
+                border-top: 2px solid #000;
+            }
+
+            @page {
+                margin: 2cm;
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+                padding: 16px;
+            }
+
+            .form-container,
+            .preview-container {
+                width: 100%;
+            }
+        }
+    </style>
+
 </head>
+
 <body>
 
-<div class="form-container">
-    <h2>Input Data Siswa & Nilai</h2>
-    <div class="form-group">
-        <label>Nama Siswa</label>
-        <input type="text" id="in_nama" value="Afrand Syahromi">
-    </div>
-    <div class="form-group">
-        <label>Asal Sekolah</label>
-        <input type="text" id="in_sekolah" value="SMK Swasta Telkom 2 Medan">
-    </div>
-
-    <h3>Tes Potensi Skolastik</h3>
-    <div class="form-group"><label>Kemampuan Penalaran Umum</label><input type="number" step="0.01" class="score-input" id="in_kpu" value="597.89"></div>
-    <div class="form-group"><label>Pengetahuan dan Pemahaman Umum</label><input type="number" step="0.01" class="score-input" id="in_ppu" value="697.27"></div>
-    <div class="form-group"><label>Kemampuan Memahami Membaca dan Menulis</label><input type="number" step="0.01" class="score-input" id="in_kmmm" value="729.63"></div>
-    <div class="form-group"><label>Pengetahuan Kuantitatif</label><input type="number" step="0.01" class="score-input" id="in_pk" value="732.33"></div>
-
-    <h3>Tes Literasi Bahasa</h3>
-    <div class="form-group"><label>Literasi Bahasa Indonesia</label><input type="number" step="0.01" class="score-input" id="in_lbi" value="918.85"></div>
-    <div class="form-group"><label>Literasi Bahasa Inggris</label><input type="number" step="0.01" class="score-input" id="in_lbing" value="428.54"></div>
-
-    <h3>Tes Penalaran Matematika</h3>
-    <div class="form-group"><label>Penalaran Matematika</label><input type="number" step="0.01" class="score-input" id="in_pm" value="596.22"></div>
-
-    <button onclick="window.print()">Cetak PDF</button>
-</div>
-
-<div class="preview-container">
-    <div class="dokumen">
-        <div class="header">
-            <h1>Bimbingan Belajar Smart School</h1>
-            <h2>HASIL SIMULASI</h2>
-            <h2>TRY OUT UJIAN TULIS BERBASIS KOMPUTER (UTBK) 2026 - 1</h2>
+    <div class="form-container">
+        <h2>✦ Input Data Siswa & Nilai</h2>
+        <div class="form-group">
+            <label>Judul Simulasi</label>
+            <input type="text" id="in_judul" value="TRY OUT UJIAN TULIS BERBASIS KOMPUTER (UTBK) 2026 - 1">
+        </div>
+        <div class="form-group">
+            <label>Nama Siswa</label>
+            <input type="text" id="in_nama" value="Afrand Syahromi">
+        </div>
+        <div class="form-group">
+            <label>Asal Sekolah</label>
+            <input type="text" id="in_sekolah" value="SMK Swasta Telkom 2 Medan">
         </div>
 
-        <table class="info-table">
-            <tr><td>Nama Siswa</td><td>:</td><td><span id="out_nama"></span></td></tr>
-            <tr><td>Asal Sekolah</td><td>:</td><td><span id="out_sekolah"></span></td></tr>
-        </table>
+        <h3>Tes Potensi Skolastik</h3>
+        <div class="form-group"><label>Kemampuan Penalaran Umum</label><input type="number" step="0.01"
+                class="score-input" id="in_kpu" value="597.89"></div>
+        <div class="form-group"><label>Pengetahuan dan Pemahaman Umum</label><input type="number" step="0.01"
+                class="score-input" id="in_ppu" value="697.27"></div>
+        <div class="form-group"><label>Kemampuan Memahami Membaca dan Menulis</label><input type="number" step="0.01"
+                class="score-input" id="in_kmmm" value="729.63"></div>
+        <div class="form-group"><label>Pengetahuan Kuantitatif</label><input type="number" step="0.01"
+                class="score-input" id="in_pk" value="732.33"></div>
 
-        <div class="section-title">Tes Potensi Skolastik:</div>
-        <table class="score-table">
-            <tr><td>Kemampuan Penalaran Umum</td><td>:</td><td><span id="out_kpu"></span></td></tr>
-            <tr><td>Pengetahuan dan Pemahaman Umum</td><td>:</td><td><span id="out_ppu"></span></td></tr>
-            <tr><td>Kemampuan Memahami Membaca dan Menulis</td><td>:</td><td><span id="out_kmmm"></span></td></tr>
-            <tr><td>Pengetahuan Kuantitatif</td><td>:</td><td><span id="out_pk"></span></td></tr>
-        </table>
+        <h3>Tes Literasi Bahasa</h3>
+        <div class="form-group"><label>Literasi Bahasa Indonesia</label><input type="number" step="0.01"
+                class="score-input" id="in_lbi" value="918.85"></div>
+        <div class="form-group"><label>Literasi Bahasa Inggris</label><input type="number" step="0.01"
+                class="score-input" id="in_lbing" value="428.54"></div>
 
-        <div class="section-title">Tes Literasi Bahasa:</div>
-        <table class="score-table">
-            <tr><td>Literasi Bahasa Indonesia</td><td>:</td><td><span id="out_lbi"></span></td></tr>
-            <tr><td>Literasi Bahasa Inggris</td><td>:</td><td><span id="out_lbing"></span></td></tr>
-        </table>
+        <h3>Tes Penalaran Matematika</h3>
+        <div class="form-group"><label>Penalaran Matematika</label><input type="number" step="0.01" class="score-input"
+                id="in_pm" value="596.22"></div>
 
-        <div class="section-title">Tes Penalaran Matematika:</div>
-        <table class="score-table">
-            <tr><td>Penalaran Matematika</td><td>:</td><td><span id="out_pm"></span></td></tr>
-        </table>
+        <button onclick="window.print()"><span>🖨️ Cetak / Simpan PDF</span></button>
 
-        <table class="summary-table">
-            <tr><td>Jumlah</td><td>:</td><td><span id="out_jumlah"></span></td></tr>
-            <tr><td>Rata-Rata</td><td>:</td><td><span id="out_rata"></span></td></tr>
-        </table>
+        <div class="footer-brand">UTBK Result Generator v1.0</div>
     </div>
-</div>
 
-<script>
-    const inputs = document.querySelectorAll('input');
+    <div class="preview-container">
+        <div class="dokumen">
+            <div class="header">
+                <h1>Bimbingan Belajar Smart School</h1>
+                <h2>HASIL SIMULASI</h2>
+                <h2 id="out_judul"></h2>
+            </div>
 
-    // Fungsi untuk mengubah format angka menjadi gaya Indonesia (koma sebagai desimal)
-    function formatNumber(num) {
-        return num.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
+            <table class="info-table">
+                <tr>
+                    <td>Nama Siswa</td>
+                    <td>:</td>
+                    <td><span id="out_nama"></span></td>
+                </tr>
+                <tr>
+                    <td>Asal Sekolah</td>
+                    <td>:</td>
+                    <td><span id="out_sekolah"></span></td>
+                </tr>
+            </table>
 
-    function updatePreview() {
-        // Update Teks Identitas
-        document.getElementById('out_nama').innerText = document.getElementById('in_nama').value || '-';
-        document.getElementById('out_sekolah').innerText = document.getElementById('in_sekolah').value || '-';
+            <div class="section-title">Tes Potensi Skolastik:</div>
+            <table class="score-table">
+                <tr>
+                    <td>Kemampuan Penalaran Umum</td>
+                    <td>:</td>
+                    <td><span id="out_kpu"></span></td>
+                </tr>
+                <tr>
+                    <td>Pengetahuan dan Pemahaman Umum</td>
+                    <td>:</td>
+                    <td><span id="out_ppu"></span></td>
+                </tr>
+                <tr>
+                    <td>Kemampuan Memahami Membaca dan Menulis</td>
+                    <td>:</td>
+                    <td><span id="out_kmmm"></span></td>
+                </tr>
+                <tr>
+                    <td>Pengetahuan Kuantitatif</td>
+                    <td>:</td>
+                    <td><span id="out_pk"></span></td>
+                </tr>
+            </table>
 
-        // Update Nilai & Kalkulasi Total
-        let total = 0;
-        let count = 0;
-        const scoreFields = ['kpu', 'ppu', 'kmmm', 'pk', 'lbi', 'lbing', 'pm'];
+            <div class="section-title">Tes Literasi Bahasa:</div>
+            <table class="score-table">
+                <tr>
+                    <td>Literasi Bahasa Indonesia</td>
+                    <td>:</td>
+                    <td><span id="out_lbi"></span></td>
+                </tr>
+                <tr>
+                    <td>Literasi Bahasa Inggris</td>
+                    <td>:</td>
+                    <td><span id="out_lbing"></span></td>
+                </tr>
+            </table>
 
-        scoreFields.forEach(field => {
-            let val = parseFloat(document.getElementById('in_' + field).value) || 0;
-            document.getElementById('out_' + field).innerText = formatNumber(val);
-            total += val;
-            count++;
+            <div class="section-title">Tes Penalaran Matematika:</div>
+            <table class="score-table">
+                <tr>
+                    <td>Penalaran Matematika</td>
+                    <td>:</td>
+                    <td><span id="out_pm"></span></td>
+                </tr>
+            </table>
+
+            <table class="summary-table">
+                <tr>
+                    <td>Jumlah</td>
+                    <td>:</td>
+                    <td><span id="out_jumlah"></span></td>
+                </tr>
+                <tr>
+                    <td>Rata-Rata</td>
+                    <td>:</td>
+                    <td><span id="out_rata"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('input');
+
+        // Fungsi untuk mengubah format angka menjadi gaya Indonesia (koma sebagai desimal)
+        function formatNumber(num) {
+            return num.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function updatePreview() {
+            // Update Teks Identitas
+            document.getElementById('out_judul').innerText = document.getElementById('in_judul').value || '-';
+            document.getElementById('out_nama').innerText = document.getElementById('in_nama').value || '-';
+            document.getElementById('out_sekolah').innerText = document.getElementById('in_sekolah').value || '-';
+
+            // Update Nilai & Kalkulasi Total
+            let total = 0;
+            let count = 0;
+            const scoreFields = ['kpu', 'ppu', 'kmmm', 'pk', 'lbi', 'lbing', 'pm'];
+
+            scoreFields.forEach(field => {
+                let val = parseFloat(document.getElementById('in_' + field).value) || 0;
+                document.getElementById('out_' + field).innerText = formatNumber(val);
+                total += val;
+                count++;
+            });
+
+            // Kalkulasi Rata-rata
+            let rata = total / count;
+
+            document.getElementById('out_jumlah').innerText = formatNumber(total);
+            document.getElementById('out_rata').innerText = formatNumber(rata);
+
+            // Update judul dokumen agar nama file PDF otomatis sesuai nama siswa
+            const nama = document.getElementById('in_nama').value.trim();
+            document.title = nama ? `Hasil UTBK - ${nama}` : 'Generator Hasil Try Out UTBK';
+        }
+
+        // Jalankan update setiap kali user mengetik di form
+        inputs.forEach(input => {
+            input.addEventListener('input', updatePreview);
         });
 
-        // Kalkulasi Rata-rata
-        let rata = total / count;
-
-        document.getElementById('out_jumlah').innerText = formatNumber(total);
-        document.getElementById('out_rata').innerText = formatNumber(rata);
-    }
-
-    // Jalankan update setiap kali user mengetik di form
-    inputs.forEach(input => {
-        input.addEventListener('input', updatePreview);
-    });
-
-    // Panggil fungsi pertama kali untuk mengisi data default
-    updatePreview();
-</script>
+        // Panggil fungsi pertama kali untuk mengisi data default
+        updatePreview();
+    </script>
 
 </body>
+
 </html>
