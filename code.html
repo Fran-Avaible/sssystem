@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator Hasil Try Out UTBK</title>
+<style>
+    body { 
+        font-family: Arial, sans-serif; 
+        display: flex; 
+        gap: 20px; 
+        padding: 20px; 
+        background: #f0f2f5; 
+        margin: 0;
+    }
+    .form-container { 
+        background: #fff; 
+        padding: 25px; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        width: 35%; 
+        height: fit-content;
+    }
+    .preview-container { 
+        background: #fff; 
+        padding: 40px; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        width: 65%; 
+    }
+    h2, h3 { color: #333; }
+    h3 { margin-top: 25px; margin-bottom: 10px; font-size: 16px; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+    .form-group { margin-bottom: 12px; }
+    label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #555; }
+    input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    input:focus { border-color: #007BFF; outline: none; }
+    button { 
+        width: 100%; 
+        padding: 12px; 
+        background: #007BFF; 
+        color: white; 
+        border: none; 
+        cursor: pointer; 
+        border-radius: 4px; 
+        font-size: 16px; 
+        font-weight: bold;
+        margin-top: 20px; 
+        transition: background 0.3s;
+    }
+    button:hover { background: #0056b3; }
+
+    /* Dokumen Preview Styles */
+    .dokumen { 
+        font-family: 'Times New Roman', Times, serif; 
+        color: #000; 
+        line-height: 1.5;
+    }
+    .header { text-align: center; margin-bottom: 30px; }
+    .header h1 { font-size: 20px; margin: 0 0 10px 0; font-weight: bold; }
+    .header h2 { font-size: 16px; margin: 0; font-weight: bold; }
+    
+    .info-table { width: 100%; margin-bottom: 20px; font-size: 15px; }
+    .info-table td { padding: 4px 0; vertical-align: top; }
+    .info-table td:first-child { width: 180px; }
+    .info-table td:nth-child(2) { width: 20px; }
+
+    .section-title { font-weight: bold; text-decoration: underline; margin-top: 20px; font-size: 15px; }
+    .score-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 15px; }
+    .score-table td { padding: 4px 0; }
+    .score-table td:first-child { padding-left: 20px; width: 400px; }
+    .score-table td:nth-child(2) { width: 20px; text-align: center; }
+    .score-table td:last-child { text-align: right; }
+
+    .summary-table { 
+        width: 100%; 
+        font-weight: bold; 
+        font-size: 15px; 
+        margin-top: 20px;
+    }
+    .summary-table td { padding: 4px 0; }
+    .summary-table td:first-child { width: 420px; text-align: right; }
+    .summary-table td:nth-child(2) { width: 20px; text-align: center; }
+    .summary-table td:last-child { text-align: right; }
+
+    /* Pengaturan Cetak (Print) */
+    @media print {
+        body { background: #fff; padding: 0; display: block; }
+        .form-container { display: none; }
+        .preview-container { width: 100%; box-shadow: none; padding: 0; margin: 0; }
+        @page { margin: 2cm; }
+    }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Input Data Siswa & Nilai</h2>
+    <div class="form-group">
+        <label>Nama Siswa</label>
+        <input type="text" id="in_nama" value="Afrand Syahromi">
+    </div>
+    <div class="form-group">
+        <label>Asal Sekolah</label>
+        <input type="text" id="in_sekolah" value="SMK Swasta Telkom 2 Medan">
+    </div>
+
+    <h3>Tes Potensi Skolastik</h3>
+    <div class="form-group"><label>Kemampuan Penalaran Umum</label><input type="number" step="0.01" class="score-input" id="in_kpu" value="597.89"></div>
+    <div class="form-group"><label>Pengetahuan dan Pemahaman Umum</label><input type="number" step="0.01" class="score-input" id="in_ppu" value="697.27"></div>
+    <div class="form-group"><label>Kemampuan Memahami Membaca dan Menulis</label><input type="number" step="0.01" class="score-input" id="in_kmmm" value="729.63"></div>
+    <div class="form-group"><label>Pengetahuan Kuantitatif</label><input type="number" step="0.01" class="score-input" id="in_pk" value="732.33"></div>
+
+    <h3>Tes Literasi Bahasa</h3>
+    <div class="form-group"><label>Literasi Bahasa Indonesia</label><input type="number" step="0.01" class="score-input" id="in_lbi" value="918.85"></div>
+    <div class="form-group"><label>Literasi Bahasa Inggris</label><input type="number" step="0.01" class="score-input" id="in_lbing" value="428.54"></div>
+
+    <h3>Tes Penalaran Matematika</h3>
+    <div class="form-group"><label>Penalaran Matematika</label><input type="number" step="0.01" class="score-input" id="in_pm" value="596.22"></div>
+
+    <button onclick="window.print()">Cetak PDF</button>
+</div>
+
+<div class="preview-container">
+    <div class="dokumen">
+        <div class="header">
+            <h1>Bimbingan Belajar Smart School</h1>
+            <h2>HASIL SIMULASI</h2>
+            <h2>TRY OUT UJIAN TULIS BERBASIS KOMPUTER (UTBK) 2026 - 1</h2>
+        </div>
+
+        <table class="info-table">
+            <tr><td>Nama Siswa</td><td>:</td><td><span id="out_nama"></span></td></tr>
+            <tr><td>Asal Sekolah</td><td>:</td><td><span id="out_sekolah"></span></td></tr>
+        </table>
+
+        <div class="section-title">Tes Potensi Skolastik:</div>
+        <table class="score-table">
+            <tr><td>Kemampuan Penalaran Umum</td><td>:</td><td><span id="out_kpu"></span></td></tr>
+            <tr><td>Pengetahuan dan Pemahaman Umum</td><td>:</td><td><span id="out_ppu"></span></td></tr>
+            <tr><td>Kemampuan Memahami Membaca dan Menulis</td><td>:</td><td><span id="out_kmmm"></span></td></tr>
+            <tr><td>Pengetahuan Kuantitatif</td><td>:</td><td><span id="out_pk"></span></td></tr>
+        </table>
+
+        <div class="section-title">Tes Literasi Bahasa:</div>
+        <table class="score-table">
+            <tr><td>Literasi Bahasa Indonesia</td><td>:</td><td><span id="out_lbi"></span></td></tr>
+            <tr><td>Literasi Bahasa Inggris</td><td>:</td><td><span id="out_lbing"></span></td></tr>
+        </table>
+
+        <div class="section-title">Tes Penalaran Matematika:</div>
+        <table class="score-table">
+            <tr><td>Penalaran Matematika</td><td>:</td><td><span id="out_pm"></span></td></tr>
+        </table>
+
+        <table class="summary-table">
+            <tr><td>Jumlah</td><td>:</td><td><span id="out_jumlah"></span></td></tr>
+            <tr><td>Rata-Rata</td><td>:</td><td><span id="out_rata"></span></td></tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    const inputs = document.querySelectorAll('input');
+
+    // Fungsi untuk mengubah format angka menjadi gaya Indonesia (koma sebagai desimal)
+    function formatNumber(num) {
+        return num.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function updatePreview() {
+        // Update Teks Identitas
+        document.getElementById('out_nama').innerText = document.getElementById('in_nama').value || '-';
+        document.getElementById('out_sekolah').innerText = document.getElementById('in_sekolah').value || '-';
+
+        // Update Nilai & Kalkulasi Total
+        let total = 0;
+        let count = 0;
+        const scoreFields = ['kpu', 'ppu', 'kmmm', 'pk', 'lbi', 'lbing', 'pm'];
+
+        scoreFields.forEach(field => {
+            let val = parseFloat(document.getElementById('in_' + field).value) || 0;
+            document.getElementById('out_' + field).innerText = formatNumber(val);
+            total += val;
+            count++;
+        });
+
+        // Kalkulasi Rata-rata
+        let rata = total / count;
+
+        document.getElementById('out_jumlah').innerText = formatNumber(total);
+        document.getElementById('out_rata').innerText = formatNumber(rata);
+    }
+
+    // Jalankan update setiap kali user mengetik di form
+    inputs.forEach(input => {
+        input.addEventListener('input', updatePreview);
+    });
+
+    // Panggil fungsi pertama kali untuk mengisi data default
+    updatePreview();
+</script>
+
+</body>
+</html>
